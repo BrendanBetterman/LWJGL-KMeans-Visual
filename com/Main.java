@@ -86,7 +86,7 @@ public class Main implements Runnable {
         tmp.setX(WIDTH/2);
         tmp.setType(gameLoop.type);
         tmp.render();
-        //canvas.drawOutLine(input.getMouseX(),HEIGHT-input.getMouseY(),gameLoop.drawCursor(),gridSize);
+        canvas.drawOutLine(input.getMouseX(),HEIGHT-input.getMouseY(),gridSize);
         //Vector2f vec = new Vector2f(player.getOffset().getX()-(float)gameLoop.xOff,player.getOffset().getY()-(float)gameLoop.yOff); 
         //canvas.drawColorArray(player.draw(),gridSize,vec);
         //UI
