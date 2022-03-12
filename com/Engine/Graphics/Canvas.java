@@ -101,7 +101,7 @@ public class Canvas {
                 //drawMatrix(c, gridSize);
             }
     }*/
-
+    
 
     public void drawQuad(float x,float y, float width,float height,colorRGB color){
         //glColor4f(1.0f,1.0f,1.0f,1.0f);

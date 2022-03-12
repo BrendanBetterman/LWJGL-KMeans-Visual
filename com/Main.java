@@ -19,7 +19,7 @@ public class Main implements Runnable {
     private int gridSize = 5;
     private Canvas canvas;
     private GameLoop gameLoop;
-    private UI tmp = new UI();
+
     //private Commands console;
 
     public void start(){
@@ -68,10 +68,7 @@ public class Main implements Runnable {
     private void update(){
          
         window.update();
-        //UI Hover
-        if(input.getMouseY() >HEIGHT -125){
-            tmp.setY(((int)input.getMouseY()-HEIGHT+125)<50 ? (int)input.getMouseY()-HEIGHT+125 : 50 );
-        }
+        
         //GameLoop
         gameLoop.update(WIDTH/gridSize,HEIGHT/gridSize<=512 ? HEIGHT/gridSize : 512);
         gameLoop.controls(WIDTH,HEIGHT);
@@ -80,16 +77,10 @@ public class Main implements Runnable {
     }
     private void render(){
         
-        //Sand render
-        //canvas.drawCluster(gameLoop.draw((int)(WIDTH/gridSize),HEIGHT/gridSize<=512 ? HEIGHT/gridSize : 512), gridSize);
-        tmp.setSize(50);
-        tmp.setX(WIDTH/2);
-        tmp.setType(gameLoop.type);
-        tmp.render();
+        
         canvas.drawOutLine(input.getMouseX(),HEIGHT-input.getMouseY(),gridSize);
-        //Vector2f vec = new Vector2f(player.getOffset().getX()-(float)gameLoop.xOff,player.getOffset().getY()-(float)gameLoop.yOff); 
-        //canvas.drawColorArray(player.draw(),gridSize,vec);
-        //UI
+        
+       
         canvas.flush();
         //Reset Window
         window.swapBuffers();
