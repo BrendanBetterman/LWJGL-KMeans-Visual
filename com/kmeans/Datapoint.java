@@ -1,29 +1,21 @@
 package com.kmeans;
 import com.kmeans.Centroid;
 public class Datapoint {
-    private float x;
-    private float y;
-    private Centroid id;
-    public Datapoint(float x,float y){
-        this.x = x;
-        this.y = y;
+    private float[] vector;
+    private int id;
+    public Datapoint(float[] vec){
+        this.vector = vec;
     }
-    public void setId(Centroid id) {
+    public void setId(int id) {
         this.id = id;
     }
-    public Centroid getId() {
+    public int getId() {
         return id;
     }
-    public float getX() {
-        return x;
+    public void set(float[] vec){
+        this.vector = vec;
     }
-    public float getY() {
-        return y;
-    }
-    public void setX(float x) {
-        this.x = x;
-    }
-    public void setY(float y) {
-        this.y = y;
+    public float[] get(){
+        return this.vector;
     }
 }
