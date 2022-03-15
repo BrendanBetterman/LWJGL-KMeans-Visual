@@ -1,16 +1,46 @@
 package com.kmeans;
-
+import java.util.Random;
 public class Kmeans {
     private Centroid[] centroid;
     private Datapoint[] data;
     public Kmeans(int centroids,int width,int height){
-
+        
+        setData(10);
+        setCentroids(centroids, 10);
+        
+    }
+    private void setCentroids(int centroids,int datasize){
+        Random rand = new Random();
+        for(int i=0; i < centroids; i++){
+            float[] tmp = new float[datasize];
+            for(int u=0; u< datasize; u++){
+                tmp[u] = rand.nextFloat();
+            }
+            this.centroid[i] = new Centroid(tmp);
+        }
+    }
+    private void setData(int size){
+        //from csv
+        Random rand = new Random();
+        data = new Datapoint[size];
+        for(int u=0; u< size; u++){
+            float[] tmp = new float[4];
+            for(int i=0; i<tmp.length; i++){
+                tmp[i] = rand.nextFloat();
+            }
+            data[u].set(tmp);
+        }
     }
     private float sq(float num){
         return num*num;
     }
+    public Datapoint[] getData(){
+        return this.data;
+    }
+    public Centroid[] getCentroids(){
+        return this.centroid;
+    }
     public float relDist(Centroid cent ,Datapoint data){
-        
         float avg =0;
         float[] tmp1 = cent.get();
         float[] tmp2 = data.get();
@@ -33,14 +63,17 @@ public class Kmeans {
             }
             data[i].setId(centId);
             centroid[centId].addAvg(data[i].get());
-
         }
-        
     }
     public void moveCentroids(){
         for(int i=0; i<this.centroid.length; i++){
             if(!centroid[i].move()){
                 //random centroid set to avoid divison by zero
+                Random rand = new Random();
+                int tmp = rand.nextInt(this.data.length);
+                data[tmp].setId(tmp);
+                centroid[i].addAvg(data[tmp].get());
+                centroid[i].move();
             }
         }
     }

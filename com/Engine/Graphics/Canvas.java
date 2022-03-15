@@ -47,7 +47,7 @@ public class Canvas {
  
     public void drawOutLine(double x,double y,int gridSize){
         
-        glColor4f(1.0f,0.0f,0.0f,0.05f);
+        //glColor4f(1.0f,0.0f,0.0f,0.05f);
         
         drawQuad((float)x-gridSize/2, (float)y-gridSize/2, gridSize*2,gridSize);   
         //drawQuad((float)y-gridSize+()*gridSize+(gridSize/1.5f), (float)x-gridSize+(i)*gridSize+(gridSize/1.5f), gridSize/1.5f, gridSize/1.5f);
