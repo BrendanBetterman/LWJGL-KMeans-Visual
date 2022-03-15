@@ -6,24 +6,33 @@ public class Kmeans {
     public Kmeans(int centroids,int width,int height){
 
     }
-    public int relDist(Centroid cent ,Datapoint data){
-
-        return 1;
+    private float sq(float num){
+        return num*num;
+    }
+    public float relDist(Centroid cent ,Datapoint data){
+        
+        float avg =0;
+        float[] tmp1 = cent.get();
+        float[] tmp2 = data.get();
+        for(int i=0; i < cent.getSize(); i ++){
+            avg += sq(tmp1[i]-tmp2[i]);
+        }
+        return avg;
     }
     
     public void classifyPoints(){
         for(int i=0; i< data.length; i++){
             int centId =0;
-            int best = relDist(centroid[0],data[i]);
+            float best = relDist(centroid[0],data[i]);
             for (int u=1; u<this.centroid.length; u++){
-                int tmp = relDist(centroid[u], data[i]);
+                float tmp = relDist(centroid[u], data[i]);
                 if(tmp<=best){
                     best=tmp;
                     centId=u;
                 }
             }
             data[i].setId(centId);
-            centroid[centId].addAvg(new float[]{1,2});
+            centroid[centId].addAvg(data[i].get());
 
         }
         
