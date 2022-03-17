@@ -3,7 +3,7 @@ import java.util.Random;
 public class Kmeans {
     private Centroid[] centroid;
     private Datapoint[] data;
-    public Kmeans(int centroids,int width,int height){
+    public Kmeans(int centroids){
         
         setData(10);
         setCentroids(centroids, 10);
@@ -11,12 +11,13 @@ public class Kmeans {
     }
     private void setCentroids(int centroids,int datasize){
         Random rand = new Random();
+        centroid = new Centroid[centroids];
         for(int i=0; i < centroids; i++){
             float[] tmp = new float[datasize];
             for(int u=0; u< datasize; u++){
-                tmp[u] = rand.nextFloat();
+                tmp[u] = rand.nextFloat()*10;
             }
-            this.centroid[i] = new Centroid(tmp);
+            centroid[i] = new Centroid(tmp);
         }
     }
     private void setData(int size){
@@ -26,9 +27,10 @@ public class Kmeans {
         for(int u=0; u< size; u++){
             float[] tmp = new float[4];
             for(int i=0; i<tmp.length; i++){
-                tmp[i] = rand.nextFloat();
+                tmp[i] = rand.nextFloat()*10;
             }
-            data[u].set(tmp);
+            
+            data[u] = new Datapoint(tmp);
         }
     }
     private float sq(float num){
@@ -44,7 +46,7 @@ public class Kmeans {
         float avg =0;
         float[] tmp1 = cent.get();
         float[] tmp2 = data.get();
-        for(int i=0; i < cent.getSize(); i ++){
+        for(int i=0; i < cent.getSize()-1; i ++){
             avg += sq(tmp1[i]-tmp2[i]);
         }
         return avg;

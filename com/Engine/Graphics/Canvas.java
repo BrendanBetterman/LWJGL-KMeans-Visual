@@ -1,6 +1,8 @@
 package com.Engine.Graphics;
 
 import com.Engine.Math.Vector2f;
+import com.kmeans.Centroid;
+import com.kmeans.Datapoint;
 
 /*
 import org.lwjgl.*;
@@ -71,6 +73,20 @@ public class Canvas {
                 //glColor4f(color[0],color[1]+(rand.nextFloat()/10),color[2],1.0f);
                 
             }
+        }
+    }
+    public void drawCentroid(Centroid[] cents,float gridSize){
+        glColor4f(1.0f,0.5f,1.0f,1.0f);
+        for(int i=0; i<cents.length; i++){
+            float[] tmp = cents[i].get();
+            drawQuad(tmp[0]*gridSize, tmp[1]*gridSize, gridSize, gridSize);
+        }
+    }
+    public void drawData(Datapoint[] data,float gridSize){
+        glColor4f(1.0f,1.0f,1.0f,1.0f);
+        for(int i=0; i<data.length; i++){
+            float[] tmp = data[i].get();
+            drawQuad(tmp[0]*gridSize, tmp[1]*gridSize, gridSize, gridSize);
         }
     }
     public void drawMatrix(int[][] a,float gridSize){

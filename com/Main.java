@@ -7,6 +7,8 @@ import com.Engine.*;
 import com.Engine.Graphics.Canvas;
 import com.Engine.Graphics.UI;
 import com.Engine.Graphics.colorRGB;
+import com.kmeans.Kmeans;
+
 import org.lwjgl.glfw.GLFW;
 
 
@@ -19,12 +21,12 @@ public class Main implements Runnable {
     private int gridSize = 5;
     private Canvas canvas;
     private GameLoop gameLoop;
-
+    private Kmeans mean;
     //private Commands console;
 
     public void start(){
         game = new Thread(this,"game");
-        
+        this.mean = new Kmeans(2);
         
         game.run();
         
@@ -68,7 +70,7 @@ public class Main implements Runnable {
     private void update(){
          
         window.update();
-        
+        mean.run();
         //GameLoop
         gameLoop.update(WIDTH/gridSize,HEIGHT/gridSize<=512 ? HEIGHT/gridSize : 512);
         gameLoop.controls(WIDTH,HEIGHT);
@@ -79,8 +81,10 @@ public class Main implements Runnable {
         
         
         canvas.drawOutLine(input.getMouseX(),HEIGHT-input.getMouseY(),gridSize);
+        //canvas.drawMatrix(a, gridSize);
+        canvas.drawData(mean.getData(),gridSize);
+        canvas.drawCentroid(mean.getCentroids(),gridSize);
         
-       
         canvas.flush();
         //Reset Window
         window.swapBuffers();
