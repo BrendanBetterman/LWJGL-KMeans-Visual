@@ -7,6 +7,8 @@ import com.Engine.*;
 import com.Engine.Graphics.Canvas;
 import com.Engine.Graphics.UI;
 import com.Engine.Graphics.colorRGB;
+import com.kmeans.Centroid;
+import com.kmeans.Datapoint;
 import com.kmeans.Kmeans;
 
 import org.lwjgl.glfw.GLFW;
@@ -70,7 +72,10 @@ public class Main implements Runnable {
     private void update(){
          
         window.update();
-        mean.run();
+        if(input.isKeyDown(GLFW.GLFW_KEY_SPACE)){
+            mean.run();
+        }
+        
         //GameLoop
         gameLoop.update(WIDTH/gridSize,HEIGHT/gridSize<=512 ? HEIGHT/gridSize : 512);
         gameLoop.controls(WIDTH,HEIGHT);
@@ -82,9 +87,19 @@ public class Main implements Runnable {
         
         canvas.drawOutLine(input.getMouseX(),HEIGHT-input.getMouseY(),gridSize);
         //canvas.drawMatrix(a, gridSize);
-        canvas.drawData(mean.getData(),gridSize);
-        canvas.drawCentroid(mean.getCentroids(),gridSize);
-        
+        int offset = 100;
+        canvas.drawData(mean.getData(),gridSize,offset);
+        canvas.drawCentroid(mean.getCentroids(),gridSize,offset);
+        Datapoint data[] = mean.getData();
+        Centroid cent[] = mean.getCentroids();
+
+        for(int i=0; i < data.length; i++){
+            Datapoint datapoint = data[i];
+            float[] tmp = datapoint.get();
+            Centroid centroid = cent[data[i].getId()];
+            float[] tmp1 = centroid.get();
+            canvas.drawLine(tmp,tmp1,gridSize,offset);
+        }
         canvas.flush();
         //Reset Window
         window.swapBuffers();

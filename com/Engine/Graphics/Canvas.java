@@ -75,19 +75,27 @@ public class Canvas {
             }
         }
     }
-    public void drawCentroid(Centroid[] cents,float gridSize){
+    public void drawCentroid(Centroid[] cents,float gridSize,int offset){
         glColor4f(1.0f,0.5f,1.0f,1.0f);
         for(int i=0; i<cents.length; i++){
             float[] tmp = cents[i].get();
-            drawQuad(tmp[0]*gridSize, tmp[1]*gridSize, gridSize, gridSize);
+            drawQuad(tmp[0]*gridSize*offset, tmp[1]*gridSize*offset, gridSize, gridSize);
         }
     }
-    public void drawData(Datapoint[] data,float gridSize){
+    public void drawData(Datapoint[] data,float gridSize,int offset){
         glColor4f(1.0f,1.0f,1.0f,1.0f);
         for(int i=0; i<data.length; i++){
             float[] tmp = data[i].get();
-            drawQuad(tmp[0]*gridSize, tmp[1]*gridSize, gridSize, gridSize);
+            drawQuad(tmp[0]*gridSize*offset, tmp[1]*gridSize*offset, gridSize, gridSize);
         }
+    }
+    public void drawLine(float[] tmp1,float[] tmp2,float gridSize,int offset){
+        glColor4f(1.0f,0.0f,1.0f,1.0f);
+        glBegin(GL_LINE);
+		glVertex2f(1.0f,0.0f);
+		glVertex2f(0.0f,1.0f);
+		
+		glEnd();
     }
     public void drawMatrix(int[][] a,float gridSize){
         

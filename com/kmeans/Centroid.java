@@ -37,6 +37,7 @@ public class Centroid {
         float[] tmp = new float[this.avgVec.length];
         for(int i=0; i < this.avgVec.length; i++){
             tmp[i] = this.avgVec[i]/this.size;
+            System.out.println(tmp[i]);
         }
         set(tmp);
         return true;
