@@ -2,6 +2,7 @@ package com.kmeans;
 import java.util.Random;
 import java.io.File;
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Kmeans {
     private Centroid[] centroid;
     private Datapoint[] data;
@@ -24,16 +25,23 @@ public class Kmeans {
     }
     private void setData(int size,int datasize){
         try{
+            ArrayList<float[]> array = new ArrayList<float[]>();
             File myObj = new File("data.csv");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()){
                 String tmp = myReader.nextLine();
                 String[] tmp2 = tmp.split(",");
+                float[] tmp3 = new float[tmp2.length];
                 for(int i=0; i < tmp2.length; i++){
-                    
+                    tmp3[i]=Float.valueOf(tmp2[i]);
                 }
+                array.add(tmp3);
             }
             myReader.close();
+            data = new Datapoint[array.size()];
+            for (int i=0; i< array.size(); i++){
+                data[i] = new Datapoint(array.get(i));
+            }
         }catch(Exception e){}
         
         /*
