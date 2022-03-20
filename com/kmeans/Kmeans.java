@@ -1,5 +1,7 @@
 package com.kmeans;
 import java.util.Random;
+import java.io.File;
+import java.util.Scanner;
 public class Kmeans {
     private Centroid[] centroid;
     private Datapoint[] data;
@@ -21,6 +23,20 @@ public class Kmeans {
         }
     }
     private void setData(int size,int datasize){
+        try{
+            File myObj = new File("data.csv");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()){
+                String tmp = myReader.nextLine();
+                String[] tmp2 = tmp.split(",");
+                for(int i=0; i < tmp2.length; i++){
+                    
+                }
+            }
+            myReader.close();
+        }catch(Exception e){}
+        
+        /*
         //from csv
         Random rand = new Random();
         data = new Datapoint[size];
@@ -31,7 +47,7 @@ public class Kmeans {
             }
             
             data[u] = new Datapoint(tmp);
-        }
+        }*/
     }
     private float sq(float num){
         return num*num;
@@ -85,5 +101,13 @@ public class Kmeans {
     public void run(){
         classifyPoints();
         moveCentroids();
+        for(Centroid i : centroid){
+            for( float u : i.get()){
+                System.out.print(u);
+                System.out.print(" ");
+            }System.out.println();
+            
+
+        }
     }
 }
