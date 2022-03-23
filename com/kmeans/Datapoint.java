@@ -1,5 +1,4 @@
 package com.kmeans;
-import com.kmeans.Centroid;
 public class Datapoint {
     private float[] vector;
     private int id;
